@@ -42,7 +42,8 @@ static int cmd_help(char *args);
 
 /*execute by one step*/
 static int cmd_si(char *args);
-
+static int cmd_info(char *args);
+static int cmd_p(char *args);
 
 static struct {
   char *name;
@@ -53,6 +54,8 @@ static struct {
   { "c", "Continue the execution of the program", cmd_c },
   { "q", "Exit NEMU", cmd_q },
 	{ "si", "execute * step by one step", cmd_si},
+	{ "info", "print reg or watchpoint info", cmd_info},
+	{ "p", "calculate the expression", cmd_p},
 
   /* TODO: Add more commands */
 
@@ -60,6 +63,7 @@ static struct {
 
 #define NR_CMD (sizeof(cmd_table) / sizeof(cmd_table[0]))
 
+/*user added*/
 static int cmd_si(char *args){
 	char *arg=strtok(NULL,"");
 	int i=-1;
@@ -72,7 +76,25 @@ static int cmd_si(char *args){
 	return 0;
 }
 
+static int cmd_info(char *args){
+	char *arg=strtok(NULL,"");
+	if (!strcmp(arg,"r")){
+		for(int index=0;index<8;index++){
+			printf("%s: %x",reg_name(index,4),reg_l(index));
+			printf("%s: %x",reg_name(index,2),reg_w(index));
+			printf("%s: %x\n",reg_name(index,1),reg_b(index));
+		}
+	}
+	else {
+		printf("error input");
+	}
+	return 0;
+}
 
+static int cmd_p(char *args){
+	
+	return 0;
+}
 
 static int cmd_help(char *args) {
   /* extract the first argument */
