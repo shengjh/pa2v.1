@@ -80,9 +80,9 @@ static int cmd_info(char *args){
 	char *arg=strtok(NULL,"");
 	if (!strcmp(arg,"r")){
 		for(int index=0;index<8;index++){
-			printf("%s: %x",reg_name(index,4),reg_l(index));
-			printf("%s: %x",reg_name(index,2),reg_w(index));
-			printf("%s: %x\n",reg_name(index,1),reg_b(index));
+			printf(" %s: %x",reg_name(index,4),reg_l(index));
+			printf(" %s: %x",reg_name(index,2),reg_w(index));
+			printf(" %s: %x\n",reg_name(index,1),reg_b(index));
 		}
 	}
 	else {
