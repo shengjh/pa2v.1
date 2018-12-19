@@ -78,6 +78,10 @@ static int cmd_si(char *args){
 
 static int cmd_info(char *args){
 	char *arg=strtok(NULL,"");
+	if(arg==NULL) {
+		printf("please input arguement!");
+		return 0;
+	}
 	if (!strcmp(arg,"r")){
 		for(int index=0;index<8;index++){
 			printf(" %s: %x",reg_name(index,4),reg_l(index));
