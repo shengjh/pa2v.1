@@ -79,7 +79,7 @@ static int cmd_si(char *args){
 static int cmd_info(char *args){
 	char *arg=strtok(NULL,"");
 	if(arg==NULL) {
-		printf("please input arguement!");
+		printf("please input arguement!\n");
 		return 0;
 	}
 	if (!strcmp(arg,"r")){
