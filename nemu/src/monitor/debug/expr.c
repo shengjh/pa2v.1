@@ -5,13 +5,13 @@
  */
 #include <sys/types.h>
 #include <regex.h>
-
+#include <stdlib.h>
 bool check_parentheses(int p,int q);
 bool is_exec(int type);
 bool is_in_parent(int p,int index);
 bool priority(int p,int q);
-
-
+int find_op(int p,int q);
+int eval(int p,int q);
 
 
 enum {
@@ -128,7 +128,7 @@ uint32_t expr(char *e, bool *success) {
   }
 
   /* TODO: Insert codes to evaluate the expression. */
-  TODO();
+  return eval(0,nr_token);
 
   return 0;
 }
@@ -156,7 +156,7 @@ bool is_minus(int index){
 
 }
 
-int find_mainexec(int p,int q){
+int find_op(int p,int q){
 	int i=0;
 	int tok[32];
 	int k=0;
@@ -176,8 +176,37 @@ int find_mainexec(int p,int q){
 	return m;
 }
 
+int eval(int p,int q){
+	if(p>q)
+		assert(0);
+	else if(p==q){
+		if(tokens[p].type == TK_HEX || tokens[p].type == TK_DEC)
+			return atoi(tokens[p].str);
+		else return 0;
+	}
+	else if(check_parentheses(p,q) == true)
+		return eval(p+1,q-1);
+	else{
+		int op = find_op(p,q);
+		int val1 = eval(p,op-1);
+		int val2 = eval(op+1,q);
 
-
+		switch(tokens[op].type){
+			case '+': return val1+val2;
+			case '*': {
+				return val1*val2;
+			}
+			case '-':{
+				if(is_minus(op))
+					return -1*val2;
+				else return val1-val2;
+			}
+			case '/': return val1/val2;
+			case TK_EQ: return val1==val2?1:0;
+			default:assert(0);
+		}
+	}
+}
 
 
 bool priority(int p,int q){
