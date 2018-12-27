@@ -206,16 +206,12 @@ int eval(int p,int q){
 		
 		switch (tokens[op].type){
 			case '+': return val1+val2;
-			case '*': {
-				return val1*val2;
-			}
-			case '-':{
-				if(is_minus(op))
-					return -1*val2;
-				else return val1-val2;
-			}
+			case '*': return val1*val2;
+			case '-':	return val1-val2;
 			case '/': return val1/val2;
 			case TK_EQ: return val1==val2?1:0;
+			case TK_MINUS: return -1 * val2;
+			case TK_POINT: return 0;
 			default:assert(0);
 		}
 	}
