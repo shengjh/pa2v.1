@@ -177,6 +177,7 @@ int find_op(int p,int q){
 }
 
 int eval(int p,int q){
+	Log("p= %d   q=%d",p,q);
 	if(p>q)
 		assert(0);
 	else if(p==q){
