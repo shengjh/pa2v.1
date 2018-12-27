@@ -170,8 +170,8 @@ int find_op(int p,int q){
 		}
 	}
 	m=tok[0];
-	for(i=0;i<k;i++){
-		if(priority(m,i)) 
+	for(i=0;i<=k;i++){
+		if(priority(m,tok[i])) 
 			m = i;
 	}
 	return m;
