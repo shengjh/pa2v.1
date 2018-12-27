@@ -96,7 +96,19 @@ static int cmd_info(char *args){
 }
 
 static int cmd_p(char *args){
-	
+	char *arg=strtok(NULL,"");
+	int result;
+	bool success = false;
+	if(arg==NULL) {
+		printf("please input arguement!\n");
+		return 0;
+	}
+  else {	
+		result=expr(arg,&success);
+		if(success)
+			printf("%d",result);	
+		else printf("wrong !");
+	}
 	return 0;
 }
 
