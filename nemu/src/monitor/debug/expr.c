@@ -190,6 +190,7 @@ int eval(int p,int q){
 		return eval(p+1,q-1);
 	else{
 		int op = find_op(p,q);
+		Log("p= %d   q=%d",p,q);
 		int val1 = eval(p,op-1);
 		int val2 = eval(op+1,q);
 
