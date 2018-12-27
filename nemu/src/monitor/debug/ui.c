@@ -38,7 +38,7 @@ static int cmd_q(char *args) {
 
 static int cmd_help(char *args);
 
-/**********************user add functions**/
+/**************user add functions*************/
 
 /*execute by one step*/
 static int cmd_si(char *args);

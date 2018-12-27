@@ -6,8 +6,19 @@
 #include <sys/types.h>
 #include <regex.h>
 
+bool check_parentheses(int p,int q);
+bool is_exec(int type);
+bool is_in_parent(int p,int index);
+bool priority(int p,int q);
+
+
+
+
 enum {
-  TK_NOTYPE = 256, TK_EQ
+  TK_NOTYPE = 256, TK_EQ,
+	TK_LEFT,TK_RIGHT,TK_HEX,TK_DEC,
+	TK_REG_NUM
+
 
   /* TODO: Add more token types */
 
@@ -17,14 +28,21 @@ static struct rule {
   char *regex;
   int token_type;
 } rules[] = {
-
   /* TODO: Add more rules.
    * Pay attention to the precedence level of different rules.
    */
 
-  {" +", TK_NOTYPE},    // spaces
-  {"\\+", '+'},         // plus
-  {"==", TK_EQ}         // equal
+  {" +", TK_NOTYPE},   					 // spaces
+	{"\\(", TK_LEFT},						 	//left-paren
+	{"\\)", TK_RIGHT},						//right-paren
+	{"\\*", '*'},				 					// mul
+	{"/", 	'/'},									// div
+  {"\\+", '+'},        				 // plus
+	{"-", '-'},				 					 // sub
+  {"==", TK_EQ},        			 // equal
+	{"\\$[a-zA-Z]*", TK_REG_NUM}, 	//register-num
+	{"0[xX][0-9a-fA-F]*", TK_HEX}, //hex-number
+	{"[1-9][0-9]*", TK_DEC} 			//dec-number
 };
 
 #define NR_REGEX (sizeof(rules) / sizeof(rules[0]) )
@@ -79,8 +97,15 @@ static bool make_token(char *e) {
          * of tokens, some extra actions should be performed.
          */
 
+	
         switch (rules[i].token_type) {
-          default: TODO();
+					case TK_NOTYPE: break;
+          default: {
+						tokens[nr_token].type = rules[i].token_type;
+						//myStrcpy(tokens[nr_token].str,substr_start,substr_len);
+						sprintf(tokens[nr_token].str,"%.*s",substr_len,substr_start);
+						nr_token++;
+					}
         }
 
         break;
@@ -107,3 +132,97 @@ uint32_t expr(char *e, bool *success) {
 
   return 0;
 }
+
+bool is_exec(int type){
+	if(type=='+' || type=='-' || type=='*' || type=='/' || type==TK_EQ)
+		return true;
+	else return false;
+}
+
+bool is_point(int index){
+	if(tokens[index].type == '*' && index == 0)
+		return true;
+	else if(tokens[index].type == '*' && is_exec(tokens[index-1].type))
+		return true;
+	else return false;
+}
+
+bool is_minus(int index){
+	if(tokens[index].type == '-' && index == 0)
+		return true;
+	else if(tokens[index].type == '-' && is_exec(tokens[index-1].type))
+		return true;
+	else return false;
+
+}
+
+int find_mainexec(int p,int q){
+	int i=0;
+	int tok[32];
+	int k=0;
+	int m=0;
+	tok[0]=p;
+	for(i=p;i<q;i++){
+		if(is_exec(tokens[i].type) && !is_in_parent(p,i)){
+			tok[k]=i;
+			k++;
+		}
+	}
+	m=tok[0];
+	for(i=0;i<k;i++){
+		if(priority(m,i)) 
+			m = i;
+	}
+	return m;
+}
+
+
+
+
+
+bool priority(int p,int q){
+	bool is_priority = true;
+	if((tokens[p].type=='+' || tokens[p].type=='-') && (tokens[q].type=='*' || tokens[q].type=='/'))
+		is_priority = false;
+	else if(tokens[p].type==TK_EQ)
+		is_priority = false;
+	else if(is_exec(tokens[p].type) && (is_point(q) || is_minus(q)))
+		is_priority = false;
+	return is_priority;
+		
+}
+
+bool is_in_parent(int p,int index){
+	int num_left=0,num_right=0;
+	for(int i=p;i<index;i++){
+		if(tokens[i].type==TK_LEFT)
+			num_left++;
+		else if(tokens[i].type==TK_RIGHT)
+			num_right++;
+	}
+	if(num_left>num_right)
+		return true;
+	else return false;
+}
+
+bool check_parentheses(int p,int q){
+	int top = -1;
+	if(!(tokens[p].type==TK_LEFT &&tokens[q].type==TK_RIGHT)) return false;
+	else{
+		p++;
+		q--;
+			while(p<=q){
+			if(tokens[p].type==TK_LEFT){
+				top++;
+			}
+			if(tokens[p].type==TK_RIGHT){
+				if(top==-1) assert(0);
+				else top--;
+			}
+			p++;
+		}
+		if(top != -1) assert(0);
+		return true;
+	}
+}
+
