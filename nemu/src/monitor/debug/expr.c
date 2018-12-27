@@ -12,12 +12,13 @@ bool is_in_parent(int p,int index);
 bool priority(int p,int q);
 int find_op(int p,int q);
 int eval(int p,int q);
-
+bool is_point(int index);
+bool is_minus(int index);
 
 enum {
   TK_NOTYPE = 256, TK_EQ,
 	TK_LEFT,TK_RIGHT,TK_HEX,TK_DEC,
-	TK_REG_NUM
+	TK_REG_NUM,TK_MINUS,TK_POINT
 
 
   /* TODO: Add more token types */
@@ -129,6 +130,12 @@ uint32_t expr(char *e, bool *success) {
 
   /* TODO: Insert codes to evaluate the expression. */
 	*success = true;
+	for(int i=0;i<nr_token;i++){
+		if(is_minus(i))
+			tokens[i].type=TK_MINUS;
+		else if(is_point(i))
+			tokens[i].type=TK_POINT;
+	}
   return eval(0,nr_token-1);
 
   return 0;
@@ -193,8 +200,8 @@ int eval(int p,int q){
 		Log("op= %d",op);
 		int val1 = eval(p,op-1);
 		int val2 = eval(op+1,q);
-
-		switch(tokens[op].type){
+		
+		switch (tokens[op].type){
 			case '+': return val1+val2;
 			case '*': {
 				return val1*val2;
