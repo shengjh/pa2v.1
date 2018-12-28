@@ -271,7 +271,8 @@ bool check_parentheses(int p,int q){
 				if(tokens[i].type==TK_RIGHT)
 					r++;
 			}
-			return false;
+			if(l==r) return true;
+			else return false;
 		}
 }
 
