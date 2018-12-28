@@ -179,6 +179,7 @@ int find_op(int p,int q){
 	}
 	m=tok[0];
 	for(i=0;i<=k;i++){
+	Log("m=%d i=%d",m,tok[i]);
 		if(priority(m,tok[i])) 
 			m = i;
 	}
