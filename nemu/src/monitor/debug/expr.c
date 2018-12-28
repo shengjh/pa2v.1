@@ -249,9 +249,9 @@ bool is_in_parent(int p,int index){
 
 bool check_parentheses(int p,int q){
 	int top = -1;
-	if(tokens[p].type==TK_LEFT &&tokens[q].type==TK_RIGHT){
-		p++;
-		q--;
+	int l=0,r=0;
+	//p++;
+	//q--;
 		while(p<=q){
 			if(tokens[p].type==TK_LEFT){
 				top++;
@@ -263,8 +263,15 @@ bool check_parentheses(int p,int q){
 			p++;
 		}
 		if(top != -1) assert(0);
-		else return true;
-	}
-	else return false;
+		else {
+			for(int i=p;i<q;i++){
+			if(l-r>=2) return true;
+				if(tokens[i].type==TK_LEFT)
+					l++;
+				if(tokens[i].type==TK_RIGHT)
+					r++;
+			}
+			return false;
+		}
 }
 
