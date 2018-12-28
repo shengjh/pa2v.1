@@ -197,7 +197,7 @@ int eval(int p,int q){
 		return eval(p+1,q-1);
 	else{
 		int op = find_op(p,q);
-		Log("op= %d =%c",op,tokens[op].type);
+		Log("op= %d =%d",op,tokens[op].type);
 		int val1;
 		if(op!=0)
 			val1 = eval(p,op-1);
