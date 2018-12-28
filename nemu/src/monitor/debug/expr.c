@@ -184,6 +184,7 @@ int find_op(int p,int q){
 			m = tok[i];
 	}
 	Log("m=%d",m);
+	assert(0);
 	return m;
 }
 
