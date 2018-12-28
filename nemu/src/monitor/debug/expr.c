@@ -264,7 +264,7 @@ bool check_parentheses(int p,int q){
 		}
 		if(top != -1) assert(0);
 		else {
-			for(int i=p;i<q;i++){
+			for(int i=p;i<=q;i++){
 			if(l-r>=2) return true;
 				if(tokens[i].type==TK_LEFT)
 					l++;
