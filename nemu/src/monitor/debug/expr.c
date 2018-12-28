@@ -195,7 +195,26 @@ int eval(int p,int q){
 	else if(p==q){
 		if(tokens[p].type == TK_HEX || tokens[p].type == TK_DEC)
 			return atoi(tokens[p].str);
-		else return 0;
+		else if(tokens[p].type == TK_REG_NUM){
+			char *str=tokens[p].str;
+			if(!strcmp(tokens[p].str,"$eax") || !strcmp(tokens[p].str,"$EAX"))
+				return cpu.eax;	
+			else if(!strcmp(tokens[p].str,"$ecx") || !strcmp(str,"$ECX"))
+				return cpu.ecx;
+			else if(!strcmp(str,"$edx") || !strcmp(str,"$EDX"))
+				return cpu.edx;
+			else if(!strcmp(str,"$ebx") || !strcmp(str,"$EBX"))
+				return cpu.ebx;
+			else if(!strcmp(str,"$esp") || !strcmp(str,"$ESP"))
+				return cpu.esp;
+			else if(!strcmp(str,"$ebp") || !strcmp(str,"$EBP"))
+				return cpu.ebp;
+			else if(!strcmp(str,"$esi") || !strcmp(str,"$ESI"))
+				return cpu.esi;
+			else if(!strcmp(str,"$edi") || !strcmp(str,"$EDI"))
+				return cpu.edi;
+			else assert(0);
+		}
 	}
 	else if(check_parentheses(p,q) == true)
 		return eval(p+1,q-1);
@@ -215,10 +234,11 @@ int eval(int p,int q){
 			case '/': return val1/val2;
 			case TK_EQ: return val1==val2?1:0;
 			case TK_MINUS: return -1 * val2;
-			case TK_POINT: return 0;
+			case TK_POINT: return vaddr_read(val2,4);
 			default:assert(0);
 		}
 	}
+	return 0;
 }
 
 
@@ -259,7 +279,7 @@ bool check_parentheses(int p,int q){
 			}
 			if(tokens[p].type==TK_RIGHT){
 				if(top==-1) {
-					printf("wrong experssion!");
+					printf("wrong experssion!\n");
 					assert(0);
 				}
 				else top--;
@@ -267,7 +287,7 @@ bool check_parentheses(int p,int q){
 			p++;
 		}
 		if(top != -1){
-			printf("wrong experssion!");
+			printf("wrong experssion!\n");
 			assert(0);
 		}
 		else {

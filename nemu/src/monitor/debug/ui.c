@@ -106,8 +106,8 @@ static int cmd_p(char *args){
   else {	
 		result=expr(arg,&success);
 		if(success)
-			printf("%d",result);	
-		else printf("wrong !");
+			printf("%d\n",result);	
+		else printf("wrong!\n");
 	}
 	return 0;
 }
