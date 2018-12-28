@@ -106,7 +106,7 @@ static int cmd_p(char *args){
   else {	
 		result=expr(arg,&success);
 		if(success)
-			printf("%d\n",result);	
+			printf("DEC=%d  HEX=%x\n",result,result);	
 		else printf("wrong!\n");
 	}
 	return 0;
