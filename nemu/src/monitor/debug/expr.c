@@ -213,6 +213,8 @@ int eval(int p,int q){
 				return cpu.esi;
 			else if(!strcmp(str,"$edi") || !strcmp(str,"$EDI"))
 				return cpu.edi;
+			else if(!strcmp(str,"$eip") || !strcmp(str,"$EIP"))
+				return cpu.eip;
 			else assert(0);
 		}
 	}
