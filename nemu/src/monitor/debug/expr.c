@@ -258,12 +258,18 @@ bool check_parentheses(int p,int q){
 				top++;
 			}
 			if(tokens[p].type==TK_RIGHT){
-				if(top==-1) assert(0);
+				if(top==-1) {
+					printf("wrong experssion!");
+					assert(0);
+				}
 				else top--;
 			}
 			p++;
 		}
-		if(top != -1) assert(0);
+		if(top != -1){
+			printf("wrong experssion!");
+			assert(0);
+		}
 		else {
 			for(int i=fp;i<=q;i++){
 			if(l-r>=2) return true;
