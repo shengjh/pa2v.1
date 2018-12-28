@@ -251,8 +251,8 @@ bool check_parentheses(int p,int q){
 	int top = -1;
 	if(!(tokens[p].type==TK_LEFT &&tokens[q].type==TK_RIGHT)) return false;
 	else{
-		p++;
-		q--;
+	//	p++;
+	//	q--;
 			while(p<=q){
 			if(tokens[p].type==TK_LEFT){
 				top++;
