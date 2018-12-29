@@ -190,11 +190,16 @@ int find_op(int p,int q){
 
 int eval(int p,int q){
 	Log("p= %d   q=%d",p,q);
+	int hex_number;
 	if(p>q)
 		assert(0);
 	else if(p==q){
-		if(tokens[p].type == TK_HEX || tokens[p].type == TK_DEC)
+		if(tokens[p].type == TK_DEC)
 			return atoi(tokens[p].str);
+		else if(tokens[p].type == TK_HEX){
+			sscanf(tokens[p].str,"%x",&hex_number);
+			return hex_number;
+		}
 		else if(tokens[p].type == TK_REG_NUM){
 			char *str=tokens[p].str;
 			if(!strcmp(tokens[p].str,"$eax") || !strcmp(tokens[p].str,"$EAX"))
