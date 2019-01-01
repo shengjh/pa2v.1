@@ -14,6 +14,9 @@ int find_op(int p,int q);
 int eval(int p,int q);
 bool is_point(int index);
 bool is_minus(int index);
+bool is_parenthese(int index);
+
+
 
 enum {
   TK_NOTYPE = 256, TK_EQ,
@@ -141,6 +144,12 @@ uint32_t expr(char *e, bool *success) {
   return 0;
 }
 
+bool is_parentheses(int index){
+	if(tokens[index].type == '(')
+		return true;
+	else return false;
+}
+
 bool is_exec(int type){
 	if(type=='+' || type=='-' || type=='*' || type=='/' || type==TK_EQ)
 		return true;
@@ -150,6 +159,8 @@ bool is_exec(int type){
 bool is_point(int index){
 	if(tokens[index].type == '*' && index == 0)
 		return true;
+	else if(is_parenthese(index))
+		return true;
 	else if(tokens[index].type == '*' && is_exec(tokens[index-1].type))
 		return true;
 	else return false;
@@ -157,6 +168,8 @@ bool is_point(int index){
 
 bool is_minus(int index){
 	if(tokens[index].type == '-' && index == 0)
+		return true;
+	else if(is_parenthese(index))
 		return true;
 	else if(tokens[index].type == '-' && is_exec(tokens[index-1].type))
 		return true;
@@ -229,7 +242,7 @@ int eval(int p,int q){
 		int op = find_op(p,q);
 		Log("op= %d =%d",op,tokens[op].type);
 		int val1;
-		if(op!=0 && is_exec(tokens[op].type))
+		if(op!=0 && is_exec(tokens[op].type))//
 			val1 = eval(p,op-1);
 		else val1=0;
 		int val2 = eval(op+1,q);
