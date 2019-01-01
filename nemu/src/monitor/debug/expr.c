@@ -159,7 +159,7 @@ bool is_exec(int type){
 bool is_point(int index){
 	if(tokens[index].type == '*' && index == 0)
 		return true;
-	else if(is_parenthese(index))
+	else if(is_parenthese(index) && tokens[index].type == '*')
 		return true;
 	else if(tokens[index].type == '*' && is_exec(tokens[index-1].type))
 		return true;
@@ -169,7 +169,7 @@ bool is_point(int index){
 bool is_minus(int index){
 	if(tokens[index].type == '-' && index == 0)
 		return true;
-	else if(is_parenthese(index))
+	else if(is_parenthese(index) && tokens[index].type == '-')
 		return true;
 	else if(tokens[index].type == '-' && is_exec(tokens[index-1].type))
 		return true;
