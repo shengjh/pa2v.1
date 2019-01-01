@@ -145,7 +145,7 @@ uint32_t expr(char *e, bool *success) {
 }
 
 bool is_parentheses(int index){
-	if(tokens[index].type == '(')
+	if(tokens[index].type == TK_LEFT)
 		return true;
 	else return false;
 }
