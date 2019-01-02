@@ -312,14 +312,15 @@ bool check_parentheses(int p,int q){
 			assert(0);
 		}
 		else {
-			for(int i=fp;i<=q;i++){
-			if(l-r>=2) return true;
+		/*	for(int i=fp;i<=q;i++){
+				if(l-r>=2) return true;
 				if(tokens[i].type==TK_LEFT)
 					l++;
 				if(tokens[i].type==TK_RIGHT)
 					r++;
 			}
-			if(l==r && l==1 && tokens[fp].type==TK_LEFT) return true;
+		*/
+			if(l==r  && tokens[fp].type==TK_LEFT) return true;
 			else return false;
 		}
 }
