@@ -139,6 +139,7 @@ uint32_t expr(char *e, bool *success) {
 		else if(is_point(i))
 			tokens[i].type=TK_POINT;
 	}
+	check_parentheses(0,nr_token-1);
   return eval(0,nr_token-1);
 
   return 0;
