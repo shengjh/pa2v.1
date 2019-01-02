@@ -320,7 +320,7 @@ bool check_parentheses(int p,int q){
 					r++;
 			}
 			if(l==r &&l==1 && tokens[fp].type==TK_LEFT) return true;
-			else if(check_parentheses(p-1,q-1)) return true;
+			else if(check_parentheses(p+1,q-1)) return true;
 			else return false;
 		}
 }
