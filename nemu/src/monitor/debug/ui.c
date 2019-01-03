@@ -10,6 +10,7 @@
 void cpu_exec(uint64_t);
 WP* new_wp(char *args);
 void free_wp(int );
+void print_w();
 
 /* We use the `readline' library to provide more flexibility to read from stdin. */
 char* rl_gets() {
@@ -94,8 +95,8 @@ static int cmd_info(char *args){
 			printf(" %s: %x\n",reg_name(index,1),reg_b(index));
 		}
 	}
-	else {
-		printf("error input");
+	else if(!strcmp(arg,"w")){
+		print_w();
 	}
 	return 0;
 }
