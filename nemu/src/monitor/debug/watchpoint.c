@@ -101,6 +101,7 @@ bool check_points(){
 	if(p==NULL) return false;
 	else{
 		while(p){
+		Log("wp NO=%d,expr=%s",p->NO,p->exec_str);
 			if(p->result != expr(p->exec_str,&success)){
 				printf("assert at wp NO=%d,expr=%s\n",p->NO,p->exec_str);
 				return true;
