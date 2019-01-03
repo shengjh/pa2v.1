@@ -139,8 +139,12 @@ uint32_t expr(char *e, bool *success) {
 		else if(is_point(i))
 			tokens[i].type=TK_POINT;
 	}
-	check_parentheses(0,nr_token-1);
-  return eval(0,nr_token-1);
+	if(check_par(0,nr_token-1))
+ 	 return eval(0,nr_token-1);
+	else {
+		*success = false;
+		return 0;
+	}
 
   return 0;
 }
@@ -313,9 +317,9 @@ bool check_par(int p,int q){
 				top++;
 				Log("top=%d (",top);
 			}
-			if(tokens[p].type==TK_RIGHT){
+			else if(tokens[p].type==TK_RIGHT){
 				if(top==-1) {
-					printf("wrong experssion0!\n");
+				//	printf("wrong experssion0!\n");
 					return false;
 				}
 				else top--;
@@ -324,7 +328,7 @@ bool check_par(int p,int q){
 			p++;
 		}
 		if(top != -1){
-			printf("wrong experssion1!\n");
+		//	printf("wrong experssion1!\n");
 			return false;
 		}
 		else return true;
