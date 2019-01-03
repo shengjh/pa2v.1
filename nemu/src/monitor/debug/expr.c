@@ -315,7 +315,7 @@ bool check_par(int p,int q){
 		while(p<=q){
 			if(tokens[p].type==TK_LEFT){
 				top++;
-				Log("top=%d (",top);
+				//Log("top=%d (",top);
 			}
 			else if(tokens[p].type==TK_RIGHT){
 				if(top==-1) {
@@ -323,7 +323,7 @@ bool check_par(int p,int q){
 					return false;
 				}
 				else top--;
-				Log("top=%d )",top);
+			//	Log("top=%d )",top);
 			}
 			p++;
 		}
