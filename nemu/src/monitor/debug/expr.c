@@ -323,7 +323,7 @@ bool check_par(int p,int q){
 			p++;
 		}
 		if(top != -1){
-			printf("wrong experssion!\n");
+			printf("wrong experssion1!\n");
 			return false;
 		}
 		else return true;
