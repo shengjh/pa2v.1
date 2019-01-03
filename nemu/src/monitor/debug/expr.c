@@ -106,9 +106,9 @@ static bool make_token(char *e) {
 					case TK_NOTYPE: break;
           default: {
 						tokens[nr_token].type = rules[i].token_type;
-						//myStrcpy(tokens[nr_token].str,substr_start,substr_len);
 						sprintf(tokens[nr_token].str,"%.*s",substr_len,substr_start);
 						nr_token++;
+						Log("ntoken=%d",nr_token);
 					}
         }
 
