@@ -315,7 +315,7 @@ bool check_par(int p,int q){
 			}
 			if(tokens[p].type==TK_RIGHT){
 				if(top==-1) {
-					printf("wrong experssion!\n");
+					printf("wrong experssion0!\n");
 					return false;
 				}
 				else top--;
