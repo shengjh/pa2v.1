@@ -299,7 +299,8 @@ bool check_parentheses(int p,int q){
 					r++;
 			}
 			if(l==r &&l==1 && tokens[fp].type==TK_LEFT) return true;
-		*/if(check_par(p+1,q-1)) return true;
+		*/
+			if(check_par(p+1,q-1) && tokens[p].type==TK_LEFT) return true;
 			else return false;
 		}
 }
