@@ -108,7 +108,7 @@ static bool make_token(char *e) {
 						tokens[nr_token].type = rules[i].token_type;
 						sprintf(tokens[nr_token].str,"%.*s",substr_len,substr_start);
 						nr_token++;
-						Log("ntoken=%d",nr_token);
+					//	Log("ntoken=%d",nr_token);
 					}
         }
 
@@ -198,17 +198,17 @@ int find_op(int p,int q){
 	}
 	m=tok[0];
 	for(i=0;i<k;i++){
-	Log("m=%d i=%d",m,tok[i]);
+//	Log("m=%d i=%d",m,tok[i]);
 		if(priority(m,tok[i])) 
 			m = tok[i];
 	}
-	Log("m=%d",m);
+//	Log("m=%d",m);
 //	assert(0);
 	return m;
 }
 
 int eval(int p,int q){
-	Log("p= %d   q=%d",p,q);
+//	Log("p= %d   q=%d",p,q);
 	int hex_number;
 	if(p>q)
 		assert(0);
@@ -246,7 +246,7 @@ int eval(int p,int q){
 		return eval(p+1,q-1);
 	else{
 		int op = find_op(p,q);
-		Log("op= %d =%d",op,tokens[op].type);
+//		Log("op= %d =%d",op,tokens[op].type);
 		int val1;
 		if(op!=0 && is_exec(tokens[op].type))//
 			val1 = eval(p,op-1);
