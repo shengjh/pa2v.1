@@ -105,6 +105,7 @@ bool check_points(){
 				printf("assert at wp NO=%d,expr=%s\n",p->NO,p->exec_str);
 				return true;
 			}
+			p = p->next;
 		}
 		return false;
 	}
