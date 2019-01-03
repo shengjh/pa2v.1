@@ -297,6 +297,7 @@ bool check_parentheses(int p,int q){
 		while(p<=q){
 			if(tokens[p].type==TK_LEFT){
 				top++;
+				Log("top=%d (",top);
 			}
 			if(tokens[p].type==TK_RIGHT){
 				if(top==-1) {
@@ -304,6 +305,7 @@ bool check_parentheses(int p,int q){
 					assert(0);
 				}
 				else top--;
+				Log("top=%d )",top);
 			}
 			p++;
 		}
