@@ -21,8 +21,8 @@ bool check_par(int p,int q);
 enum {
   TK_NOTYPE = 256, TK_EQ,
 	TK_LEFT,TK_RIGHT,TK_HEX,TK_DEC,
-	TK_REG_NUM,TK_MINUS,TK_POINT
-
+	TK_REG_NUM,TK_MINUS,TK_POINT,
+	TK_LTOET,TK_MTOET
 
   /* TODO: Add more token types */
 
@@ -43,6 +43,8 @@ static struct rule {
 	{"/", 	'/'},									// div
   {"\\+", '+'},        				 // plus
 	{"-", '-'},				 					 // sub
+	{"<=", TK_LTOET},					// <=
+	{">=", TK_MTOET},					// >=
   {"==", TK_EQ},        			 // equal
 	{"\\$[a-zA-Z]*", TK_REG_NUM}, 	//register-num
 	{"0[xX][0-9a-fA-F]*", TK_HEX}, //hex-number

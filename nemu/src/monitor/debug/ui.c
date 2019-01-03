@@ -8,6 +8,8 @@
 #include <readline/history.h>
 
 void cpu_exec(uint64_t);
+WP* new_wp(char *args);
+void free_wp(int );
 
 /* We use the `readline' library to provide more flexibility to read from stdin. */
 char* rl_gets() {
@@ -44,6 +46,8 @@ static int cmd_help(char *args);
 static int cmd_si(char *args);
 static int cmd_info(char *args);
 static int cmd_p(char *args);
+static int cmd_w(char *args);
+static int cmd_d(char *args);
 
 static struct {
   char *name;
@@ -56,7 +60,8 @@ static struct {
 	{ "si", "execute * step by one step", cmd_si},
 	{ "info", "print reg or watchpoint info", cmd_info},
 	{ "p", "calculate the expression", cmd_p},
-
+	{ "w", "new watchpoint", cmd_w},
+	{ "d", "delete awtchpoint NO", cmd_d},
   /* TODO: Add more commands */
 
 };
@@ -110,6 +115,30 @@ static int cmd_p(char *args){
 		else printf("wrong!\n");
 	}
 	return 0;
+}
+
+static int cmd_w(char *args){
+	char *arg=strtok(NULL,"");
+	if(arg==NULL) {
+		printf("wrong watchpoint!\n");
+		return 0;
+	}
+	else{
+		new_wp(arg);
+		return 0;
+	}
+}
+
+static int cmd_d(char *args){
+	char *arg=strtok(NULL,"");
+	if(arg==NULL){
+		printf("wrong watchpoint NO");
+		return 0;
+	}
+	else{
+		free_wp(atoi(arg));
+		return 0;
+	}
 }
 
 static int cmd_help(char *args) {
