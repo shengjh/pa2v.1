@@ -38,7 +38,7 @@ WP* new_wp(char *exp){
 		if(head==NULL){
 			head = fwp;
 			head->next = NULL;
-			 printf("successful creat a new watchpoint: NO=%d,exp=%s,result=%d\n",head->NO,head->exec_str,head->result);
+		  printf("successful creat a new watchpoint: NO=%d,exp=%s,result=%d\n",head->NO,head->exec_str,head->result);
 		}
 		else{
 			fwp->next = head->next;
@@ -90,7 +90,7 @@ void print_w(){
 	if(p==NULL) return;
 	printf("NO   what                result   \n");
 	while(p){
-		printf("%6d%20s%d\n",p->NO,p->exec_str,p->result);
+		printf("%-6d%-20s%d\n",p->NO,p->exec_str,p->result);
 		p=p->next;
 	}
 }
