@@ -15,7 +15,7 @@ int eval(int p,int q);
 bool is_point(int index);
 bool is_minus(int index);
 bool is_parentheses(int index);
-
+bool check_par(int p,int q);
 
 
 enum {
@@ -289,11 +289,24 @@ bool is_in_parent(int p,int index){
 }
 
 bool check_parentheses(int p,int q){
+	if(!check_par(p,q)) assert(0);
+		else {
+		/*	for(int i=fp;i<=q;i++){
+				//if(l-r>=2 && tokens[fp].type==TK_LEFT) return true;
+				if(tokens[i].type==TK_LEFT)
+					l++;
+				if(tokens[i].type==TK_RIGHT)
+					r++;
+			}
+			if(l==r &&l==1 && tokens[fp].type==TK_LEFT) return true;
+		*/if(check_par(p+1,q-1)) return true;
+			else return false;
+		}
+}
+
+bool check_par(int p,int q){
 	int top = -1;
-	int l=0,r=0;
-	int fp=p;
-	//p++;
-	//q--;
+//	int fp=p;
 		while(p<=q){
 			if(tokens[p].type==TK_LEFT){
 				top++;
@@ -302,7 +315,7 @@ bool check_parentheses(int p,int q){
 			if(tokens[p].type==TK_RIGHT){
 				if(top==-1) {
 					printf("wrong experssion!\n");
-					assert(0);
+					return false;
 				}
 				else top--;
 				Log("top=%d )",top);
@@ -311,19 +324,7 @@ bool check_parentheses(int p,int q){
 		}
 		if(top != -1){
 			printf("wrong experssion!\n");
-			assert(0);
+			return false;
 		}
-		else {
-			for(int i=fp;i<=q;i++){
-				//if(l-r>=2 && tokens[fp].type==TK_LEFT) return true;
-				if(tokens[i].type==TK_LEFT)
-					l++;
-				if(tokens[i].type==TK_RIGHT)
-					r++;
-			}
-			if(l==r &&l==1 && tokens[fp].type==TK_LEFT) return true;
-			else if(check_parentheses(fp+1,q-1)) return true;
-			else return false;
-		}
+		else return true;
 }
-
