@@ -191,7 +191,7 @@ int find_op(int p,int q){
 	tok[0]=p;
 	for(i=p;i<q;i++){
 		if(is_exec(tokens[i].type) && !is_in_parent(p,i)){
-			Log("i=%d",i);
+//			Log("i=%d",i);
 			tok[k]=i;
 			k++;
 		}
