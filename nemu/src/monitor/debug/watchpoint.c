@@ -100,12 +100,14 @@ void print_w(){
 bool check_points(){
 	WP *p =head;
 	bool success;
+	int re;
 	if(p==NULL) return false;
 	else{
 		while(p){
 		Log("wp NO=%d,expr=%s",p->NO,p->exec_str);
-			if(p->result != expr(p->exec_str,&success)){
-				printf("assert at wp NO=%d,expr=%s\n",p->NO,p->exec_str);
+			re = expr(p->exec_str,&success);
+			if(p->result != re){
+				printf("assert at wp NO=%d,expr=%s,result=%d\n",p->NO,p->exec_str,re);
 				return true;
 			}
 			p = p->next;
