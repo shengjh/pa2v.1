@@ -43,8 +43,8 @@ WP* new_wp(char *exp){
 		else{
 			fwp->next = head->next;
 			head->next = fwp;
+			printf("successful creat a new watchpoint: NO=%d,exp=%s,result=%d\n",fwp->NO,fwp->exec_str,fwp->result);
 		}
-		printf("successful creat a new watchpoint: NO=%d,exp=%s,result=%d\n",fwp->NO,fwp->exec_str,fwp->result);
 	}
 	return fwp;
 }
