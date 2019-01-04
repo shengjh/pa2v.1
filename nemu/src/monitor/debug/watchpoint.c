@@ -30,7 +30,7 @@ WP* new_wp(char *exp){
 			fwp = free_->next;
 			free_->next = fwp->next;
 		}
-	//	strcpy(fwp->exec_str,exp);
+		strcpy(fwp->exec_str,exp);
 		int re;
 		bool success;
 		re = expr(exp,&success);
@@ -89,7 +89,7 @@ void free_wp(int i){
 void print_w(){
 	WP *p = head;
 	if(p==NULL) return;
-	printf("NO   what                result   \n");
+	printf("NO    what                result   \n");
 	while(p){
 		printf("%-6d%-20s%d\n",p->NO,p->exec_str,p->result);
 		p=p->next;
