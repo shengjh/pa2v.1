@@ -30,7 +30,7 @@ WP* new_wp(char *exp){
 			fwp = free_->next;
 			free_->next = fwp->next;
 		}
-		strcpy(fwp->exec_str,exp);
+	//	strcpy(fwp->exec_str,exp);
 		int re;
 		bool success;
 		re = expr(exp,&success);
