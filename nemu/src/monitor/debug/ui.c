@@ -80,6 +80,7 @@ static int cmd_x(char *args){
 	}
 	else{
 		Log("%s",arg);
+		strtok(NULL," ");
 		int n=atoi(strtok(NULL,""));
 		Log("n=%d",n);
 		if(n==0) return 0;
