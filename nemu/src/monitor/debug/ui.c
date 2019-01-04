@@ -79,7 +79,7 @@ static int cmd_x(char *args){
 		return 0;
 	}
 	else{
-		int n=atoi(strtok(NULL," "));
+		int n=atoi(strtok(NULL,""));
 		Log("n=%d",n);
 		if(n==0) return 0;
 		char *exp=strtok(NULL," ");
