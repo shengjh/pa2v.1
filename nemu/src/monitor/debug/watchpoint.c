@@ -30,7 +30,7 @@ WP* new_wp(char *exp){
 			fwp = free_->next;
 			free_->next = fwp->next;
 		}
-		fwp->exec_str = exp;
+		strcpy(fwp->exec_str,exp);
 		int re;
 		bool success;
 		re = expr(exp,&success);
@@ -55,6 +55,7 @@ void free_wp(int i){
 	if(head->NO == i){
 		wp = head;
 		head = head->next;
+		printf("successful delete the watchpoint NO=%d\n",wp->NO);
 	}
 	else{
 		pre = head;
