@@ -121,6 +121,7 @@ static int cmd_info(char *args){
 			printf(" %s: 0x%x\n",reg_name(index,1),reg_b(index));
 		}
 		printf(" eip: 0x%x\n",cpu.eip);
+		printf(" edx: 0x%x\n",cpu.edx);
 	}
 	else if(!strcmp(arg,"w")){
 		print_w();
