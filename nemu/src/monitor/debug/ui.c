@@ -99,6 +99,7 @@ static int cmd_x(char *args){
 
 static int cmd_si(char *args){
 	char *arg=strtok(NULL,"");
+	printf("s=%s",arg);
 	int i=-1;
 	if(arg==NULL)
 		i=1;
