@@ -73,7 +73,7 @@ static struct {
 
 /*added by sherwin*/
 static int cmd_x(char *args){
-	char *arg=strtok(NULL," ");
+	char *arg=strtok(NULL,"");
 	if(arg==NULL){
 		printf("please input right arguement\n");
 		return 0;
@@ -83,7 +83,7 @@ static int cmd_x(char *args){
 		int n=atoi(strtok(NULL,""));
 		Log("n=%d",n);
 		if(n==0) return 0;
-		char *exp=strtok(NULL," ");
+		char *exp=strtok(NULL,"");
 		Log("%s",exp);
 		bool success;
 		int result;
