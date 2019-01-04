@@ -116,10 +116,11 @@ static int cmd_info(char *args){
 	}
 	if (!strcmp(arg,"r")){
 		for(int index=0;index<8;index++){
-			printf(" %s: %x",reg_name(index,4),reg_l(index));
-			printf(" %s: %x",reg_name(index,2),reg_w(index));
-			printf(" %s: %x\n",reg_name(index,1),reg_b(index));
+			printf(" %s: 0x%x",reg_name(index,4),reg_l(index));
+			printf(" %s: 0x%x",reg_name(index,2),reg_w(index));
+			printf(" %s: 0x%x\n",reg_name(index,1),reg_b(index));
 		}
+		printf(" eip: 0x%x\n",cpu.eip);
 	}
 	else if(!strcmp(arg,"w")){
 		print_w();
