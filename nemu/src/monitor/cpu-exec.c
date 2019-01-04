@@ -43,7 +43,7 @@ void cpu_exec(uint64_t n) {
     /* TODO: check watchpoints here. */
 		bool check_result = check_points();
 		if(check_result){
-			printf("assert at the watchpoint\n");
+			//printf("assert at the watchpoint\n");
 			nemu_state = NEMU_STOP;
 		}
 
