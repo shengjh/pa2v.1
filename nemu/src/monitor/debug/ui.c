@@ -49,6 +49,7 @@ static int cmd_info(char *args);
 static int cmd_p(char *args);
 static int cmd_w(char *args);
 static int cmd_d(char *args);
+static int cmd_x(char *);
 
 static struct {
   char *name;
@@ -63,13 +64,35 @@ static struct {
 	{ "p", "calculate the expression", cmd_p},
 	{ "w", "new watchpoint", cmd_w},
 	{ "d", "delete awtchpoint NO", cmd_d},
+	{ "x", "x n expr:scan the memory",cmd_x},
   /* TODO: Add more commands */
 
 };
 
 #define NR_CMD (sizeof(cmd_table) / sizeof(cmd_table[0]))
 
-/*user added*/
+/*added by sherwin*/
+static int cmd_x(char *args){
+	char *arg=strtok(NULL,"");
+	if(arg==NULL){
+		printf("please input right arguement\n");
+		return 0;
+	}
+	else{
+		int n=atoi(strtok(NULL,""));
+		if(n==0) return 0;
+		char *exp=strtok(NULL,"");
+		bool success;
+		int result;
+		result=expr(exp,&success);
+		for(int i=0;i<n;i++){
+			printf("address=0x%x,res=0x%x\n",result+i*4,vaddr_read(result+i*4,4));
+		}
+		return 0;
+	}
+}
+
+
 static int cmd_si(char *args){
 	char *arg=strtok(NULL,"");
 	int i=-1;
