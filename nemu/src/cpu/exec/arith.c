@@ -17,6 +17,10 @@ make_EHelper(add) {
   print_asm_template2(add);
 }
 
+make_EHelper(rol){
+
+}
+
 make_EHelper(sub) {
   TODO();
 
