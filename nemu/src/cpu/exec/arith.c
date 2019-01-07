@@ -1,7 +1,18 @@
 #include "cpu/exec.h"
 
 make_EHelper(add) {
-  TODO();
+  rtl_add(&t0, &id_dest->val, &id_src->val);
+	operand_write(id_dest, &t0);
+
+	rtl_update_ZFSF(&t0, id_dest->width);
+	rtl_setrelop(RELOP_GTU, &t1, &id_dest->val, &t0);
+	rtl_set_CF(&t1);
+
+	rtl_xor(&t2, &id_dest->val, &t0);
+	rtl_xor(&t3, &id_src->val, &t0);
+	rtl_and(&t1, &t2, &t3);
+	rtl_msb(&t0, &t1, id_dest->width);
+	rtl_set_OF(&t0);
 
   print_asm_template2(add);
 }
