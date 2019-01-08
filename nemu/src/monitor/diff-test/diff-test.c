@@ -71,5 +71,38 @@ void difftest_step(uint32_t eip) {
 
   // TODO: Check the registers state with the reference design.
   // Set `nemu_state` to `NEMU_ABORT` if they are not the same.
-  TODO();
+  printf("+------------------------------------------+\n");
+	  if ( ref_r.eax != cpu.eax) { 
+		    printf("r.eax = %x, cpu.eax = %x\n", ref_r.eax,cpu.eax);
+				  }
+					  if(ref_r.ecx != cpu.ecx) {
+						    printf("r.ecx = %x, cpu.ecx = %x\n", ref_r.ecx,cpu.ecx);
+								  }
+									  if(ref_r.edx != cpu.edx) {
+										    printf("r.edx = %x, cpu.edx = %x\n", ref_r.edx,cpu.edx);
+												  }
+													  if(ref_r.ebx != cpu.ebx) {
+														    printf("r.ebx = %x, cpu.ebx = %x\n", ref_r.ebx,cpu.ebx);
+																  }
+																	  if(ref_r.esp != cpu.esp) {
+																		    printf("r.esp = %x, cpu.esp = %x\n", ref_r.esp,cpu.esp);
+																				  }
+																					  if(ref_r.ebp != cpu.ebp) {
+																						    printf("r.ebp = %x, cpu.ebp = %x\n", ref_r.ebp,cpu.ebp);
+																								  }
+																									  if(ref_r.esi != cpu.esi) {
+																										    printf("r.esi = %x, cpu.esi = %x\n", ref_r.esi,cpu.esi);
+																												  }
+																													  if(ref_r.edi != cpu.edi) {
+																														    printf("r.edi = %x, cpu.edi = %x\n", ref_r.edi,cpu.edi);
+																																  }
+																																	  if(ref_r.eip != cpu.eip || 1) {
+																																		    printf("r.eip = %x, cpu.eip = %x\n", ref_r.eip,cpu.eip);
+																																				  }
+																																					  if ( ref_r.eax != cpu.eax || ref_r.ecx != cpu.ecx || ref_r.edx != cpu.edx || ref_r.ebx != cpu.ebx || ref_r.esp != cpu.esp || ref_r.ebp != cpu.ebp || ref_r.esi != cpu.esi || ref_r.edi != cpu.edi || ref_r.eip != cpu.eip) {
+																																						    nemu_state = NEMU_ABORT;
+																																								    printf("r.eip = %x, cpu.eip = %x\n", ref_r.eip,cpu.eip); 
+																																										    
+																																												  }
+																																													  printf("+------------------------------------------+\n");
 }
