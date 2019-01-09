@@ -96,7 +96,7 @@ void difftest_step(uint32_t eip) {
 																													  if(ref_r.edi != cpu.edi) {
 																														    printf("r.edi = %x, cpu.edi = %x\n", ref_r.edi,cpu.edi);
 																																  }
-																																	  if(ref_r.eip != cpu.eip) {
+																																	  if(ref_r.eip != cpu.eip || 1) {
 																																		    printf("r.eip = %x, cpu.eip = %x\n", ref_r.eip,cpu.eip);
 																																				  }
 																																					  if ( ref_r.eax != cpu.eax || ref_r.ecx != cpu.ecx || ref_r.edx != cpu.edx || ref_r.ebx != cpu.ebx || ref_r.esp != cpu.esp || ref_r.ebp != cpu.ebp || ref_r.esi != cpu.esi || ref_r.edi != cpu.edi || ref_r.eip != cpu.eip) {
