@@ -27,7 +27,7 @@ size_t video_write(uintptr_t reg, void *buf, size_t size) {
   switch (reg) {
     case _DEVREG_VIDEO_FBCTL: {
       _FBCtlReg *ctl = (_FBCtlReg *)buf;
-			
+/*			
 			int W = screen_width();
 			int H = screen_height();
 			int x = ctl->x, y = ctl->y, w = ctl->w, h = ctl->h;
@@ -36,7 +36,14 @@ size_t video_write(uintptr_t reg, void *buf, size_t size) {
 		  for (int j = 0; j < h && y + j < H; j ++) {
 		      memcpy(&fb[(y + j) * W + x], pixels, cp_bytes);
 		      pixels += w;
-		  } 
+		  }
+*/
+		int W = screen_width();
+		uint32_t *base = fb + ctl->y * W + ctl->x;
+		for(int y=0;y< ctl->h;++y){
+			for(int x=0;x< ctl->w;++x)
+				base[y*W+x] = ctl->pixels[y*ctl->w+x];
+		}
       if (ctl->sync) {
         // do nothing, hardware syncs.
       }
