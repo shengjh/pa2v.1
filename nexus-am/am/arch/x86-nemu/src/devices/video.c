@@ -3,9 +3,7 @@
 #include <amdev.h>
 #include <klib.h>
 
-
-#define W 400
-#define H 300
+int W,H;
 static uint32_t* const fb __attribute__((used)) = (uint32_t *)0x40000;
 
 static inline int min(int x, int y) {
@@ -18,8 +16,8 @@ size_t video_read(uintptr_t reg, void *buf, size_t size) {
       _VideoInfoReg *info = (_VideoInfoReg *)buf;
       uint32_t screen;
       screen = inl(0x100);
-      info->width = screen >> 16;
-      info->height = screen << 16 >> 16;
+      W=info->width = screen >> 16;
+      H=info->height = screen << 16 >> 16;
       return sizeof(_VideoInfoReg);
     }
   }
