@@ -77,6 +77,7 @@ make_EHelper(movsx) {
 	printf("******%x\n",cpu.eax);
 	id_dest->width = decoding.is_operand_size_16 ? 2 : 4;
 	rtl_sext(&t0, &id_src->val, id_src->width);
+	printf("$$$%x %d\n",t0,id_dest->width);
 	operand_write(id_dest, &t0);
 	 print_asm_template2(movsx);
  	printf("******%x\n",cpu.eax);
