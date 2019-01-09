@@ -5,10 +5,12 @@
 size_t input_read(uintptr_t reg, void *buf, size_t size) {
   switch (reg) {
     case _DEVREG_INPUT_KBD: {
-      _KbdReg *kbd = (_KbdReg *)buf;
-      kbd->keydown = 0;
-      kbd->keycode = _KEY_NONE;
-      return sizeof(_KbdReg);
+    _KbdReg *kbd = (_KbdReg *)buf;
+     unsigned long long press = inl(0x60);
+     kbd->keycode = press;
+     if(press != _KEY_NONE)
+				kbd->keydown = !(kbd->keydown);
+     return sizeof(_KbdReg);
     }
   }
   return 0;
