@@ -55,7 +55,6 @@ make_EHelper(in) {
 make_EHelper(out) {
   pio_write(id_dest->val, id_src->val, id_dest->width);
 	print_asm_template2(out);
-  print_asm_template2(out);
 
 #if defined(DIFF_TEST)
   difftest_skip_ref();
