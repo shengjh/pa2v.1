@@ -10,7 +10,7 @@ size_t strlen(const char *s) {
 }
 
 char *strcpy(char* dst,const char* src) {
-  while((*(dst++) = *(src++)) != '\0');
+  while((*(dst++) = *(src++)) != '\0') {};
 	return dst;
 }
 
@@ -26,14 +26,14 @@ char* strncpy(char* dest, const char* src, size_t n) {
 
 char* strcat(char* dst, const char* src) {
   char* s;
-	for (s = dst; *s != '\0'; s++);
+	for (s = dst; *s != '\0'; s++){};
 	  while ((*s++ = *src++) != '\0');
 	return dst;
 }
 
 int strcmp(const char* s1, const char* s2) {
   size_t i;
-  for (i = 0; s1[i] != '\0' && s1[i] == s2[i]; i++);
+  for (i = 0; s1[i] != '\0' && s1[i] == s2[i]; i++){};
 	  if (s1[i] > s2[i]) {
 	     return 1;
 		 }
@@ -45,7 +45,7 @@ int strcmp(const char* s1, const char* s2) {
 
 int strncmp(const char* s1, const char* s2, size_t n) {
   size_t i;
-	for(i=0; s1[i]!= '\0' && s1[i]==s2[i] && i<n; i++);
+	for(i=0; s1[i]!= '\0' && s1[i]==s2[i] && i<n; i++){};
 	if(s1[i]>s2[i])
 		return 1;
 	else if(s1[i] < s2[i])
@@ -70,7 +70,7 @@ int memcmp(const void* s1, const void* s2, size_t n){
 	unsigned char* p2 = (unsigned char*)s2;
   size_t i;
   n--;
-  for (i = 0; p1[i] != '\0' && p1[i] == p2[i] && i < n; i++);
+  for (i = 0; p1[i] != '\0' && p1[i] == p2[i] && i < n; i++){} ;
 	  if (p1[i] > p2[i]) {
 		    return 1;
 	  }
