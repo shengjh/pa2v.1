@@ -37,7 +37,10 @@ make_EHelper(int) {
 }
 
 make_EHelper(iret) {
-  TODO();
+  rtlreg_t target_eip;
+  rtl_pop(&target_eip);
+  rtl_add(&cpu.esp, &cpu.esp, &id_dest->val);
+  rtl_jr(&target_eip);
 
   print_asm("iret");
 }
